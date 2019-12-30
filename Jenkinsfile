@@ -1,5 +1,11 @@
 pipeline {
 agent any
+ environment {
+     client_id       =  credentials('azuresp')
+     client_secret   =  credentials('azuresp')
+     subscription_id =  credentials('azuresp')
+     tenant_id       =  credentials('azuresp')
+ }
 stages {
  stage('Checkout') {
  steps {
@@ -25,12 +31,7 @@ stages {
  }
  
  stage('TF Plan') {
-    environment {
-     client_id       =  credentials('azuresp')
-     client_secret   =  credentials('azuresp')
-     subscription_id =  credentials('azuresp')
-     tenant_id       =  credentials('azuresp')
- }
+   
  steps {
  sh "terraform plan -out=plan"
  }
