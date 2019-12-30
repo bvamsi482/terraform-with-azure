@@ -24,6 +24,12 @@ stages {
  }
  }
  
+ stage('Install Az CLI') {
+     steps {
+         sh "curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash"
+     }
+ }
+
  stage('TF Plan') {
    
  steps {
