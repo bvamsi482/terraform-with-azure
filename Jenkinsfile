@@ -1,11 +1,5 @@
 pipeline {
 agent any
- environment {
-     client_id       =  credentials('azuresp')
-     client_secret   =  credentials('azuresp')
-     subscription_id =  credentials('azuresp')
-     tenant_id       =  credentials('azuresp')
- }
 stages {
  stage('Checkout') {
  steps {
@@ -31,7 +25,12 @@ stages {
  }
  
  stage('TF Plan') {
-   
+   withCredentials([azureServicePrincipal(credentialsId: 'Terraform-temp',
+                                    subscriptionIdVariable: 'SUBS_ID',
+                                    clientIdVariable: 'CLIENT_ID',
+                                    clientSecretVariable: 'CLIENT_SECRET',
+                                    tenantIdVariable: 'TENANT_ID')]) {
+        sh 'az login --service-principal -u $CLIENT_ID -p $CLIENT_SECRET -t $TENANT_ID'
  steps {
  sh "terraform plan -out=plan"
  }
