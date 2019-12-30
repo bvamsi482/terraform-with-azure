@@ -26,7 +26,7 @@ stages {
  
  stage('Install Az CLI') {
      steps {
-         sh "u+x ./install.sh"
+         sh "chmod u+x ./install.sh"
          sh "./install.sh"
 
      }
