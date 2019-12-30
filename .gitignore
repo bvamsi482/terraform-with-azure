@@ -8,3 +8,7 @@
 debuglog.txt
 **/terraform_plugins/**
 **/.vscode/**
+.terraform/
+*.tfstate
+*.tfstate.backup
+*.tfstate.lock.info
