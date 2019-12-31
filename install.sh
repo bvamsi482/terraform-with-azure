@@ -2,8 +2,8 @@
 
 echo "Installing Azure CLI"
 
-apt-get update -y
-apt-get install -y sudo ca-certificates curl apt-transport-https lsb-release gnupg
+sudo apt-get update -y
+sudo apt-get install -y ca-certificates curl apt-transport-https lsb-release gnupg
 
 AZ_REPO=$(lsb_release -cs)
 echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $AZ_REPO main" | \
