@@ -23,13 +23,6 @@ stages {
             sh "terraform init"
               }
     }
- 
-    stage('Install Az CLI') {
-        steps {
-            sh "chmod u+x ./install.sh"
-            sh "./install.sh"
-              }
-    }
 
     stage('TF Plan') {
         steps {
