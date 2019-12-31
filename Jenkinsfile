@@ -1,10 +1,10 @@
 pipeline {
     agent any
     environment {
-        ARM_SUBSCRIPTION_ID = credentials('subscription_id')
-        ARM_TENANT_ID = credentials('tenant_id')
-        ARM_CLIENT_ID = credentials('client_id')
-        ARM_CLIENT_SECRET = credentials('client_secret')
+        ARM_SUBSCRIPTION_ID = credentials('Subscription ID')
+        ARM_TENANT_ID = credentials('Tenant ID')
+        ARM_CLIENT_ID = credentials('Client ID')
+        ARM_CLIENT_SECRET = credentials('Client Secret')
     }
     stages {
        stage('Checkout') {
