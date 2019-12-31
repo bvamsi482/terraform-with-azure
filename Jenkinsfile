@@ -1,10 +1,11 @@
 pipeline {
     agent any
-    environment {
-        ARM_SUBSCRIPTION_ID = credentials('Subscription ID')
-        ARM_TENANT_ID = credentials('Tenant ID')
-        ARM_CLIENT_ID = credentials('Client ID')
-        ARM_CLIENT_SECRET = credentials('Client Secret')
+    withCredentials([azureServicePrincipal(credentialsId: 'Terraform-temp',
+                                    subscriptionIdVariable: 'AZURE_SUBSCRIPTION_ID',
+                                    clientIdVariable: 'AZURE_CLIENT_ID',
+                                    clientSecretVariable: 'AZURE_CLIENT_SECRET',
+                                    tenantIdVariable: 'AZURE_TENANT_ID')]) {
+            sh 'az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET -t $AZURE_TENANT_ID' 
     }
     stages {
        stage('Checkout') {
