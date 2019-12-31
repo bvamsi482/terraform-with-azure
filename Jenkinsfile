@@ -20,13 +20,17 @@ pipeline {
                 sh "terraform init"
             }
         }
-        stage('TF Plan') {
+        stage('AZ Auth') {
+            steps {
             withCredentials([azureServicePrincipal(credentialsId: 'Terraform-temp',
                                     subscriptionIdVariable: 'AZURE_SUBSCRIPTION_ID',
                                     clientIdVariable: 'AZURE_CLIENT_ID',
                                     clientSecretVariable: 'AZURE_CLIENT_SECRET',
                                     tenantIdVariable: 'AZURE_TENANT_ID')]) {
-            sh 'az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET -t $AZURE_TENANT_ID' 
+            sh 'az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET -t $AZURE_TENANT_ID' }
+            }
+        }
+        stage('TF Plan') {
             steps {
                 sh "terraform plan"
             }
